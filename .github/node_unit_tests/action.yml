@@ -9,7 +9,7 @@ runs:
       run: npm install --ignore-scripts --unsafe-perm
       shell: bash
     - name: Boostrap Dependencies
-      run: npx lerna bootstrap --no-ci --unsafe-perm
+      run: npx lerna bootstrap --no-ci
       shell: bash
     - name: Unit tests
       run: npm run test
