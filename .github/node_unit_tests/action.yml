@@ -13,6 +13,6 @@ runs:
     - name: Boostrap Dependencies
       run: npx lerna bootstrap --no-ci
       shell: bash
-    # - name: Unit tests
-    #   run: npm run test
-    #   shell: bash
+    - name: Unit tests
+      run: npm run test
+      shell: bash
