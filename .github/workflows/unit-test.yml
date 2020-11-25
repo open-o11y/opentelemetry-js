@@ -11,7 +11,7 @@ jobs:
       image: node:8
     steps:
       - uses: actions/checkout@v2
-      - uses: ./.github/node_unit_tests@v1
+      - uses: ./.github/node_unit_tests
   # node10:
   #   runs-on: ubuntu-latest
   #   container:
