@@ -5,15 +5,13 @@ runs:
     - name: Create Checksum
       run: sh .github/scripts/checksum.sh /tmp/checksums.txt
       shell: bash
-    - name: Print Node Version
-      run: echo "$(node --version)"
+    - name: Install Root Dependencies
+      run: npm install --ignore-scripts
+      env:
+        NPM_CONFIG_UNSAFE_PERM: true
       shell: bash
-    # - name: Install Dependencies
-    #   run: |
-    #     npm install --ignore-scripts
-    #     npx lerna bootstrap --no-ci
-    #   env:
-    #     NPM_CONFIG_UNSAFE_PERM: true
+    # - name: Boostrap Dependencies
+    #   run: npx lerna bootstrap --no-ci
     #   shell: bash
     # - name: Unit tests
     #   run: npm run test
