@@ -6,9 +6,7 @@ runs:
       run: sh .github/scripts/checksum.sh /tmp/checksums.txt
       shell: bash
     - name: Install Root Dependencies
-      run: npm install --ignore-scripts
-      env:
-        NPM_CONFIG_UNSAFE_PERM: true
+      run: npm install --ignore-scripts --unsafe-perm
       shell: bash
     - name: Boostrap Dependencies
       run: npx lerna bootstrap --no-ci
