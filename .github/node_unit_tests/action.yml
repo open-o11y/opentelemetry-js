@@ -13,6 +13,6 @@ runs:
       env:
         NPM_CONFIG_UNSAFE_PERM: true
       shell: bash
-    # - name: Unit tests
-    #   run: npm run test
-    #   shell: bash
+    - name: Unit tests
+      run: npm run test
+      shell: bash
