@@ -20,7 +20,7 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - name: Node 10 Unit Tests
-      - uses: ./.github/node_unit_tests
+        uses: ./.github/node_unit_tests
   node12:
     runs-on: ubuntu-latest
     container:
@@ -28,7 +28,7 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - name: Node 12 Unit Tests
-      - uses: ./.github/node_unit_tests
+        uses: ./.github/node_unit_tests
   node14:
     runs-on: ubuntu-latest
     container:
@@ -36,4 +36,4 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - name: Node 14 Unit Tests
-      - uses: ./.github/node_unit_tests
+        uses: ./.github/node_unit_tests
