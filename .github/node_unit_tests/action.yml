@@ -2,6 +2,9 @@ name: Node Unit Tests
 runs:
   using: "composite"
   steps:
+    - name: Checkout
+      uses: actions/checkout@v1
+      shell: bash
     - name: Create Checksum
       run: sh .github/scripts/checksum.sh /tmp/checksums.txt
       shell: bash
