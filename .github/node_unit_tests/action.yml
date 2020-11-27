@@ -33,7 +33,7 @@ runs:
           packages/opentelemetry-resource-detector-aws/node_modules
           packages/opentelemetry-resource-detector-gcp/node_modules
           packages/opentelemetry-resources/node_modules
-        key: ${{ runner.os }}-${{ checksum "/tmp/checksums.txt" }}-20B74F85
+        key: ${{ runner.os }}-$(checksum "/tmp/checksums.txt)" }}-20B74F85
     - name: Install Root Dependencies
       run: npm install --ignore-scripts --unsafe-perm
       shell: bash
