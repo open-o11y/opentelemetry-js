@@ -5,7 +5,7 @@ runs:
     - name: Create Checksum
       run: sh .github/scripts/checksum.sh /tmp/checksums.txt
       shell: bash
-    - name: Cache multiple paths
+    - name: Cache Dependencies
       uses: actions/cache@v2
       with:
         path: |
@@ -34,7 +34,6 @@ runs:
           packages/opentelemetry-resource-detector-gcp/node_modules
           packages/opentelemetry-resources/node_modules
         key: ${{ runner.os }}-${{ checksum "/tmp/checksums.txt" }}-20B74F85
-        shell: bash
     - name: Install Root Dependencies
       run: npm install --ignore-scripts --unsafe-perm
       shell: bash

@@ -11,8 +11,45 @@ jobs:
       image: node:8
     steps:
       - uses: actions/checkout@v1
-      - name: Node 8 Unit Tests
-        uses: ./.github/node_unit_tests
+      - name: Create Checksum
+        run: sh .github/scripts/checksum.sh /tmp/checksums.txt
+      - name: Cache Dependencies
+        uses: actions/cache@v2
+        with:
+          path: |
+            ./node_modules
+            ./package-lock.json
+            packages/opentelemetry-api/node_modules
+            packages/opentelemetry-context-async-hooks/node_modules
+            packages/opentelemetry-context-base/node_modules
+            packages/opentelemetry-context-zone/node_modules
+            packages/opentelemetry-context-zone-peer-dep/node_modules
+            packages/opentelemetry-core/node_modules
+            packages/opentelemetry-exporter-jaeger/node_modules
+            packages/opentelemetry-exporter-prometheus/node_modules
+            packages/opentelemetry-exporter-zipkin/node_modules
+            packages/opentelemetry-metrics/node_modules
+            packages/opentelemetry-node/node_modules
+            packages/opentelemetry-shim-opentracing/node_modules
+            packages/opentelemetry-tracing/node_modules
+            packages/opentelemetry-web/node_modules
+            packages/opentelemetry-plugin-grpc/node_modules
+            packages/opentelemetry-plugin-http/node_modules
+            packages/opentelemetry-plugin-https/node_modules
+            packages/opentelemetry-exporter-collector/node_modules
+            packages/opentelemetry-instrumentation-xml-http-request/node_modules
+            packages/opentelemetry-resource-detector-aws/node_modules
+            packages/opentelemetry-resource-detector-gcp/node_modules
+            packages/opentelemetry-resources/node_modules
+          key: ${{ runner.os }}-${{ checksum "/tmp/checksums.txt" }}-20B74F85
+      - name: Install Root Dependencies
+        run: npm install --ignore-scripts --unsafe-perm
+      - name: Boostrap Dependencies
+        run: npx lerna bootstrap --no-ci
+        env:
+          NPM_CONFIG_UNSAFE_PERM: true
+      - name: Unit tests
+        run: npm run test
   # node10:
   #   runs-on: ubuntu-latest
   #   container:
