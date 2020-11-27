@@ -113,6 +113,8 @@ jobs:
             package-lock.json
             */*/node_modules
           key: ${{ runner.os }}-node12-browsers-${{ hashFiles('**/package-lock.json') }}
+      - name: Fix Permissions
+        run: sudo chown -R 3434:3434 "/github/home/.npm"
       - name: Install Root Dependencies
         run: npm install --ignore-scripts
       - name: Boostrap Dependencies
