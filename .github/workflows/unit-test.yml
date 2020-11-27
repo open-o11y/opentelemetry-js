@@ -112,16 +112,14 @@ jobs:
             node_modules
             package-lock.json
             */*/node_modules
-          key: ${{ runner.os }}-node12-browsers-${{ hashFiles('**/package-lock.json') }}
-      - name: Fix Permissions
-        run: sudo chown -R 3434:3434 "/github/home/.npm"
+          key: ${{ runner.os }}-node12-${{ hashFiles('**/package-lock.json') }}
       - name: Install Root Dependencies
-        run: npm install --ignore-scripts
+        run: sudo npm install --ignore-scripts
       - name: Boostrap Dependencies
-        run: npx lerna bootstrap --no-ci
+        run: sudo npx lerna bootstrap --no-ci
         env:
           NPM_CONFIG_UNSAFE_PERM: true
       - name: Unit tests
-        run: npm run test
+        run: sudo npm run test
       - name: Report Coverage
-        run: npm run codecov
+        run: sudo npm run codecov
