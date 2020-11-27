@@ -20,7 +20,7 @@ jobs:
             node_modules
             package-lock.json
             packages/*/node_modules
-          key: ${{ runner.os }}-8-${{ hashFiles('**/package-lock.json') }}-20B74F85
+          key: ${{ runner.os }}-node8-${{ hashFiles('**/package-lock.json') }}
       - name: Install Root Dependencies
         run: npm install --ignore-scripts
       - name: Boostrap Dependencies
@@ -42,7 +42,7 @@ jobs:
             node_modules
             package-lock.json
             packages/*/node_modules
-          key: ${{ runner.os }}-10-${{ hashFiles('**/package-lock.json') }}-20B74F85
+          key: ${{ runner.os }}-node10-${{ hashFiles('**/package-lock.json') }}
       - name: Install Root Dependencies
         run: npm install --ignore-scripts
       - name: Boostrap Dependencies
@@ -64,7 +64,7 @@ jobs:
             node_modules
             package-lock.json
             packages/*/node_modules
-          key: ${{ runner.os }}-12-${{ hashFiles('**/package-lock.json') }}-20B74F85
+          key: ${{ runner.os }}-node12-${{ hashFiles('**/package-lock.json') }}
       - name: Install Root Dependencies
         run: npm install --ignore-scripts
       - name: Boostrap Dependencies
@@ -73,7 +73,7 @@ jobs:
           NPM_CONFIG_UNSAFE_PERM: true
       - name: Unit tests
         run: npm run test
-      - name: report coverage
+      - name: Report Coverage
         run: npm run codecov
   node14:
     runs-on: ubuntu-latest
@@ -90,10 +90,36 @@ jobs:
             node_modules
             package-lock.json
             packages/*/node_modules
-          key: ${{ runner.os }}-14-${{ hashFiles('**/package-lock.json') }}-20B74F85
+          key: ${{ runner.os }}-node14-${{ hashFiles('**/package-lock.json') }}
       - name: Install Root Dependencies
         run: npm install --ignore-scripts
       - name: Boostrap Dependencies
         run: npx lerna bootstrap --no-ci
       - name: Unit tests
         run: npm run test
+  node12-browsers:
+    runs-on: ubuntu-latest
+    container:
+      image: circleci/node:12-browsers
+    env:
+      NPM_CONFIG_UNSAFE_PERM: true
+    steps:
+      - uses: actions/checkout@v1
+      - name: Cache Dependencies
+        uses: actions/cache@v2
+        with:
+          path: |
+            node_modules
+            package-lock.json
+            packages/*/node_modules
+          key: ${{ runner.os }}-node12-${{ hashFiles('**/package-lock.json') }}
+      - name: Install Root Dependencies
+        run: npm install --ignore-scripts
+      - name: Boostrap Dependencies
+        run: npx lerna bootstrap --no-ci
+        env:
+          NPM_CONFIG_UNSAFE_PERM: true
+      - name: Unit tests
+        run: npm run test
+      - name: Report Coverage
+        run: npm run codecov
