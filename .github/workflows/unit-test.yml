@@ -114,7 +114,7 @@ jobs:
             */*/node_modules
           key: ${{ runner.os }}-node12-${{ hashFiles('**/package-lock.json') }}
       - name: Fix Permissions
-        run: sudo chown -R 3434:3434 "/root/.cache"
+        run: sudo chmod 777 /root/.cache
       - name: Install Root Dependencies
         run: npm install --ignore-scripts
       - name: Boostrap Dependencies
