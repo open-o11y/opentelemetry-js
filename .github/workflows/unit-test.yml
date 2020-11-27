@@ -113,13 +113,15 @@ jobs:
             package-lock.json
             */*/node_modules
           key: ${{ runner.os }}-node12-${{ hashFiles('**/package-lock.json') }}
+      - name: Fix Permissions
+        run: sudo chown -R 3434:3434 "/root/.cache"
       - name: Install Root Dependencies
-        run: sudo npm install --ignore-scripts
+        run: npm install --ignore-scripts
       - name: Boostrap Dependencies
-        run: sudo npx lerna bootstrap --no-ci
+        run: npx lerna bootstrap --no-ci
         env:
           NPM_CONFIG_UNSAFE_PERM: true
       - name: Unit tests
-        run: sudo npm run test
+        run: npm run test
       - name: Report Coverage
-        run: sudo npm run codecov
+        run: npm run codecov
