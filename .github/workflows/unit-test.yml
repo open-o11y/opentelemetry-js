@@ -19,7 +19,7 @@ jobs:
           path: |
             node_modules
             package-lock.json
-            packages/*/node_modules
+            */*/node_modules
           key: ${{ runner.os }}-node8-${{ hashFiles('**/package-lock.json') }}
       - name: Install Root Dependencies
         run: npm install --ignore-scripts
@@ -41,7 +41,7 @@ jobs:
           path: |
             node_modules
             package-lock.json
-            packages/*/node_modules
+            */*/node_modules
           key: ${{ runner.os }}-node10-${{ hashFiles('**/package-lock.json') }}
       - name: Install Root Dependencies
         run: npm install --ignore-scripts
@@ -63,7 +63,7 @@ jobs:
           path: |
             node_modules
             package-lock.json
-            packages/*/node_modules
+            */*/node_modules
           key: ${{ runner.os }}-node12-${{ hashFiles('**/package-lock.json') }}
       - name: Install Root Dependencies
         run: npm install --ignore-scripts
@@ -89,7 +89,7 @@ jobs:
           path: |
             node_modules
             package-lock.json
-            packages/*/node_modules
+            */*/node_modules
           key: ${{ runner.os }}-node14-${{ hashFiles('**/package-lock.json') }}
       - name: Install Root Dependencies
         run: npm install --ignore-scripts
@@ -111,8 +111,8 @@ jobs:
           path: |
             node_modules
             package-lock.json
-            packages/*/node_modules
-          key: ${{ runner.os }}-node12-${{ hashFiles('**/package-lock.json') }}
+            */*/node_modules
+          key: ${{ runner.os }}-node12-browsers-${{ hashFiles('**/package-lock.json') }}
       - name: Install Root Dependencies
         run: npm install --ignore-scripts
       - name: Boostrap Dependencies
