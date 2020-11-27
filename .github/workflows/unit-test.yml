@@ -11,6 +11,7 @@ jobs:
       image: node:8
     env:
       NPM_CONFIG_UNSAFE_PERM: true
+      NODE_VERSION: $(node --version | grep -oE 'v[0-9]+')
     steps:
       - uses: actions/checkout@v1
       - name: Create Checksum
@@ -43,149 +44,149 @@ jobs:
             packages/opentelemetry-resource-detector-aws/node_modules
             packages/opentelemetry-resource-detector-gcp/node_modules
             packages/opentelemetry-resources/node_modules
-          key: ${{ node --version }}-${{ cat /tmp/checksums.txt | md5sum }}-20B74F85
+          key: ${{ NODE_VERSION }}-${{ cat /tmp/checksums.txt | md5sum }}-20B74F85
       - name: Install Root Dependencies
         run: npm install --ignore-scripts
       - name: Boostrap Dependencies
         run: npx lerna bootstrap --no-ci
       - name: Unit tests
         run: npm run test
-  node10:
-    runs-on: ubuntu-latest
-    container:
-      image: node:10
-    env:
-      NPM_CONFIG_UNSAFE_PERM: true
-    steps:
-      - uses: actions/checkout@v1
-      - name: Create Checksum
-        run: sh .github/scripts/checksum.sh /tmp/checksums.txt
-      - name: Cache Dependencies
-        uses: actions/cache@v2
-        with:
-          path: |
-            ./node_modules
-            ./package-lock.json
-            packages/opentelemetry-api/node_modules
-            packages/opentelemetry-context-async-hooks/node_modules
-            packages/opentelemetry-context-base/node_modules
-            packages/opentelemetry-context-zone/node_modules
-            packages/opentelemetry-context-zone-peer-dep/node_modules
-            packages/opentelemetry-core/node_modules
-            packages/opentelemetry-exporter-jaeger/node_modules
-            packages/opentelemetry-exporter-prometheus/node_modules
-            packages/opentelemetry-exporter-zipkin/node_modules
-            packages/opentelemetry-metrics/node_modules
-            packages/opentelemetry-node/node_modules
-            packages/opentelemetry-shim-opentracing/node_modules
-            packages/opentelemetry-tracing/node_modules
-            packages/opentelemetry-web/node_modules
-            packages/opentelemetry-plugin-grpc/node_modules
-            packages/opentelemetry-plugin-http/node_modules
-            packages/opentelemetry-plugin-https/node_modules
-            packages/opentelemetry-exporter-collector/node_modules
-            packages/opentelemetry-instrumentation-xml-http-request/node_modules
-            packages/opentelemetry-resource-detector-aws/node_modules
-            packages/opentelemetry-resource-detector-gcp/node_modules
-            packages/opentelemetry-resources/node_modules
-          key: ${{ node --version }}-${{ cat /tmp/checksums.txt | md5sum }}-20B74F85
-      - name: Install Root Dependencies
-        run: npm install --ignore-scripts
-      - name: Boostrap Dependencies
-        run: npx lerna bootstrap --no-ci
-      - name: Unit tests
-        run: npm run test
-  node12:
-    runs-on: ubuntu-latest
-    container:
-      image: node:12
-    env:
-      NPM_CONFIG_UNSAFE_PERM: true
-    steps:
-      - uses: actions/checkout@v1
-      - name: Create Checksum
-        run: sh .github/scripts/checksum.sh /tmp/checksums.txt
-      - name: Cache Dependencies
-        uses: actions/cache@v2
-        with:
-          path: |
-            ./node_modules
-            ./package-lock.json
-            packages/opentelemetry-api/node_modules
-            packages/opentelemetry-context-async-hooks/node_modules
-            packages/opentelemetry-context-base/node_modules
-            packages/opentelemetry-context-zone/node_modules
-            packages/opentelemetry-context-zone-peer-dep/node_modules
-            packages/opentelemetry-core/node_modules
-            packages/opentelemetry-exporter-jaeger/node_modules
-            packages/opentelemetry-exporter-prometheus/node_modules
-            packages/opentelemetry-exporter-zipkin/node_modules
-            packages/opentelemetry-metrics/node_modules
-            packages/opentelemetry-node/node_modules
-            packages/opentelemetry-shim-opentracing/node_modules
-            packages/opentelemetry-tracing/node_modules
-            packages/opentelemetry-web/node_modules
-            packages/opentelemetry-plugin-grpc/node_modules
-            packages/opentelemetry-plugin-http/node_modules
-            packages/opentelemetry-plugin-https/node_modules
-            packages/opentelemetry-exporter-collector/node_modules
-            packages/opentelemetry-instrumentation-xml-http-request/node_modules
-            packages/opentelemetry-resource-detector-aws/node_modules
-            packages/opentelemetry-resource-detector-gcp/node_modules
-            packages/opentelemetry-resources/node_modules
-          key: ${{ node --version }}-${{ cat /tmp/checksums.txt | md5sum }}-20B74F85
-      - name: Install Root Dependencies
-        run: npm install --ignore-scripts
-      - name: Boostrap Dependencies
-        run: npx lerna bootstrap --no-ci
-        env:
-          NPM_CONFIG_UNSAFE_PERM: true
-      - name: Unit tests
-        run: npm run test
-      - name: report coverage
-        run: npm run codecov
-  node14:
-    runs-on: ubuntu-latest
-    container:
-      image: node:14
-    env:
-      NPM_CONFIG_UNSAFE_PERM: true
-    steps:
-      - uses: actions/checkout@v1
-      - name: Create Checksum
-        run: sh .github/scripts/checksum.sh /tmp/checksums.txt
-      - name: Cache Dependencies
-        uses: actions/cache@v2
-        with:
-          path: |
-            ./node_modules
-            ./package-lock.json
-            packages/opentelemetry-api/node_modules
-            packages/opentelemetry-context-async-hooks/node_modules
-            packages/opentelemetry-context-base/node_modules
-            packages/opentelemetry-context-zone/node_modules
-            packages/opentelemetry-context-zone-peer-dep/node_modules
-            packages/opentelemetry-core/node_modules
-            packages/opentelemetry-exporter-jaeger/node_modules
-            packages/opentelemetry-exporter-prometheus/node_modules
-            packages/opentelemetry-exporter-zipkin/node_modules
-            packages/opentelemetry-metrics/node_modules
-            packages/opentelemetry-node/node_modules
-            packages/opentelemetry-shim-opentracing/node_modules
-            packages/opentelemetry-tracing/node_modules
-            packages/opentelemetry-web/node_modules
-            packages/opentelemetry-plugin-grpc/node_modules
-            packages/opentelemetry-plugin-http/node_modules
-            packages/opentelemetry-plugin-https/node_modules
-            packages/opentelemetry-exporter-collector/node_modules
-            packages/opentelemetry-instrumentation-xml-http-request/node_modules
-            packages/opentelemetry-resource-detector-aws/node_modules
-            packages/opentelemetry-resource-detector-gcp/node_modules
-            packages/opentelemetry-resources/node_modules
-          key: ${{ node --version }}-${{ cat /tmp/checksums.txt | md5sum }}-20B74F85
-      - name: Install Root Dependencies
-        run: npm install --ignore-scripts
-      - name: Boostrap Dependencies
-        run: npx lerna bootstrap --no-ci
-      - name: Unit tests
-        run: npm run test
+  # node10:
+  #   runs-on: ubuntu-latest
+  #   container:
+  #     image: node:10
+  #   env:
+  #     NPM_CONFIG_UNSAFE_PERM: true
+  #   steps:
+  #     - uses: actions/checkout@v1
+  #     - name: Create Checksum
+  #       run: sh .github/scripts/checksum.sh /tmp/checksums.txt
+  #     - name: Cache Dependencies
+  #       uses: actions/cache@v2
+  #       with:
+  #         path: |
+  #           ./node_modules
+  #           ./package-lock.json
+  #           packages/opentelemetry-api/node_modules
+  #           packages/opentelemetry-context-async-hooks/node_modules
+  #           packages/opentelemetry-context-base/node_modules
+  #           packages/opentelemetry-context-zone/node_modules
+  #           packages/opentelemetry-context-zone-peer-dep/node_modules
+  #           packages/opentelemetry-core/node_modules
+  #           packages/opentelemetry-exporter-jaeger/node_modules
+  #           packages/opentelemetry-exporter-prometheus/node_modules
+  #           packages/opentelemetry-exporter-zipkin/node_modules
+  #           packages/opentelemetry-metrics/node_modules
+  #           packages/opentelemetry-node/node_modules
+  #           packages/opentelemetry-shim-opentracing/node_modules
+  #           packages/opentelemetry-tracing/node_modules
+  #           packages/opentelemetry-web/node_modules
+  #           packages/opentelemetry-plugin-grpc/node_modules
+  #           packages/opentelemetry-plugin-http/node_modules
+  #           packages/opentelemetry-plugin-https/node_modules
+  #           packages/opentelemetry-exporter-collector/node_modules
+  #           packages/opentelemetry-instrumentation-xml-http-request/node_modules
+  #           packages/opentelemetry-resource-detector-aws/node_modules
+  #           packages/opentelemetry-resource-detector-gcp/node_modules
+  #           packages/opentelemetry-resources/node_modules
+  #         key: ${{ node --version }}-${{ cat /tmp/checksums.txt | md5sum }}-20B74F85
+  #     - name: Install Root Dependencies
+  #       run: npm install --ignore-scripts
+  #     - name: Boostrap Dependencies
+  #       run: npx lerna bootstrap --no-ci
+  #     - name: Unit tests
+  #       run: npm run test
+  # node12:
+  #   runs-on: ubuntu-latest
+  #   container:
+  #     image: node:12
+  #   env:
+  #     NPM_CONFIG_UNSAFE_PERM: true
+  #   steps:
+  #     - uses: actions/checkout@v1
+  #     - name: Create Checksum
+  #       run: sh .github/scripts/checksum.sh /tmp/checksums.txt
+  #     - name: Cache Dependencies
+  #       uses: actions/cache@v2
+  #       with:
+  #         path: |
+  #           ./node_modules
+  #           ./package-lock.json
+  #           packages/opentelemetry-api/node_modules
+  #           packages/opentelemetry-context-async-hooks/node_modules
+  #           packages/opentelemetry-context-base/node_modules
+  #           packages/opentelemetry-context-zone/node_modules
+  #           packages/opentelemetry-context-zone-peer-dep/node_modules
+  #           packages/opentelemetry-core/node_modules
+  #           packages/opentelemetry-exporter-jaeger/node_modules
+  #           packages/opentelemetry-exporter-prometheus/node_modules
+  #           packages/opentelemetry-exporter-zipkin/node_modules
+  #           packages/opentelemetry-metrics/node_modules
+  #           packages/opentelemetry-node/node_modules
+  #           packages/opentelemetry-shim-opentracing/node_modules
+  #           packages/opentelemetry-tracing/node_modules
+  #           packages/opentelemetry-web/node_modules
+  #           packages/opentelemetry-plugin-grpc/node_modules
+  #           packages/opentelemetry-plugin-http/node_modules
+  #           packages/opentelemetry-plugin-https/node_modules
+  #           packages/opentelemetry-exporter-collector/node_modules
+  #           packages/opentelemetry-instrumentation-xml-http-request/node_modules
+  #           packages/opentelemetry-resource-detector-aws/node_modules
+  #           packages/opentelemetry-resource-detector-gcp/node_modules
+  #           packages/opentelemetry-resources/node_modules
+  #         key: ${{ node --version }}-${{ cat /tmp/checksums.txt | md5sum }}-20B74F85
+  #     - name: Install Root Dependencies
+  #       run: npm install --ignore-scripts
+  #     - name: Boostrap Dependencies
+  #       run: npx lerna bootstrap --no-ci
+  #       env:
+  #         NPM_CONFIG_UNSAFE_PERM: true
+  #     - name: Unit tests
+  #       run: npm run test
+  #     - name: report coverage
+  #       run: npm run codecov
+  # node14:
+  #   runs-on: ubuntu-latest
+  #   container:
+  #     image: node:14
+  #   env:
+  #     NPM_CONFIG_UNSAFE_PERM: true
+  #   steps:
+  #     - uses: actions/checkout@v1
+  #     - name: Create Checksum
+  #       run: sh .github/scripts/checksum.sh /tmp/checksums.txt
+  #     - name: Cache Dependencies
+  #       uses: actions/cache@v2
+  #       with:
+  #         path: |
+  #           ./node_modules
+  #           ./package-lock.json
+  #           packages/opentelemetry-api/node_modules
+  #           packages/opentelemetry-context-async-hooks/node_modules
+  #           packages/opentelemetry-context-base/node_modules
+  #           packages/opentelemetry-context-zone/node_modules
+  #           packages/opentelemetry-context-zone-peer-dep/node_modules
+  #           packages/opentelemetry-core/node_modules
+  #           packages/opentelemetry-exporter-jaeger/node_modules
+  #           packages/opentelemetry-exporter-prometheus/node_modules
+  #           packages/opentelemetry-exporter-zipkin/node_modules
+  #           packages/opentelemetry-metrics/node_modules
+  #           packages/opentelemetry-node/node_modules
+  #           packages/opentelemetry-shim-opentracing/node_modules
+  #           packages/opentelemetry-tracing/node_modules
+  #           packages/opentelemetry-web/node_modules
+  #           packages/opentelemetry-plugin-grpc/node_modules
+  #           packages/opentelemetry-plugin-http/node_modules
+  #           packages/opentelemetry-plugin-https/node_modules
+  #           packages/opentelemetry-exporter-collector/node_modules
+  #           packages/opentelemetry-instrumentation-xml-http-request/node_modules
+  #           packages/opentelemetry-resource-detector-aws/node_modules
+  #           packages/opentelemetry-resource-detector-gcp/node_modules
+  #           packages/opentelemetry-resources/node_modules
+  #         key: ${{ node --version }}-${{ cat /tmp/checksums.txt | md5sum }}-20B74F85
+  #     - name: Install Root Dependencies
+  #       run: npm install --ignore-scripts
+  #     - name: Boostrap Dependencies
+  #       run: npx lerna bootstrap --no-ci
+  #     - name: Unit tests
+  #       run: npm run test
