@@ -9,6 +9,8 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: node:8
+    env:
+      NPM_CONFIG_UNSAFE_PERM: true
     steps:
       - uses: actions/checkout@v1
       - name: Create Checksum
@@ -41,19 +43,19 @@ jobs:
             packages/opentelemetry-resource-detector-aws/node_modules
             packages/opentelemetry-resource-detector-gcp/node_modules
             packages/opentelemetry-resources/node_modules
-          key: ${{ runner.os }}-$(cat /tmp/checksums.txt | md5sum)-20B74F85
+          key: ${{ node --version }}-${{ cat /tmp/checksums.txt | md5sum }}-20B74F85
       - name: Install Root Dependencies
-        run: npm install --ignore-scripts --unsafe-perm
+        run: npm install --ignore-scripts
       - name: Boostrap Dependencies
         run: npx lerna bootstrap --no-ci
-        env:
-          NPM_CONFIG_UNSAFE_PERM: true
       - name: Unit tests
         run: npm run test
   node10:
     runs-on: ubuntu-latest
     container:
       image: node:10
+    env:
+      NPM_CONFIG_UNSAFE_PERM: true
     steps:
       - uses: actions/checkout@v1
       - name: Create Checksum
@@ -86,19 +88,19 @@ jobs:
             packages/opentelemetry-resource-detector-aws/node_modules
             packages/opentelemetry-resource-detector-gcp/node_modules
             packages/opentelemetry-resources/node_modules
-          key: ${{ runner.os }}-$(cat /tmp/checksums.txt | md5sum)-20B74F85
+          key: ${{ node --version }}-${{ cat /tmp/checksums.txt | md5sum }}-20B74F85
       - name: Install Root Dependencies
-        run: npm install --ignore-scripts --unsafe-perm
+        run: npm install --ignore-scripts
       - name: Boostrap Dependencies
         run: npx lerna bootstrap --no-ci
-        env:
-          NPM_CONFIG_UNSAFE_PERM: true
       - name: Unit tests
         run: npm run test
   node12:
     runs-on: ubuntu-latest
     container:
       image: node:12
+    env:
+      NPM_CONFIG_UNSAFE_PERM: true
     steps:
       - uses: actions/checkout@v1
       - name: Create Checksum
@@ -131,9 +133,9 @@ jobs:
             packages/opentelemetry-resource-detector-aws/node_modules
             packages/opentelemetry-resource-detector-gcp/node_modules
             packages/opentelemetry-resources/node_modules
-          key: ${{ runner.os }}-$(cat /tmp/checksums.txt | md5sum)-20B74F85
+          key: ${{ node --version }}-${{ cat /tmp/checksums.txt | md5sum }}-20B74F85
       - name: Install Root Dependencies
-        run: npm install --ignore-scripts --unsafe-perm
+        run: npm install --ignore-scripts
       - name: Boostrap Dependencies
         run: npx lerna bootstrap --no-ci
         env:
@@ -146,6 +148,8 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: node:14
+    env:
+      NPM_CONFIG_UNSAFE_PERM: true
     steps:
       - uses: actions/checkout@v1
       - name: Create Checksum
@@ -178,12 +182,10 @@ jobs:
             packages/opentelemetry-resource-detector-aws/node_modules
             packages/opentelemetry-resource-detector-gcp/node_modules
             packages/opentelemetry-resources/node_modules
-          key: ${{ runner.os }}-$(cat /tmp/checksums.txt | md5sum)-20B74F85
+          key: ${{ node --version }}-${{ cat /tmp/checksums.txt | md5sum }}-20B74F85
       - name: Install Root Dependencies
-        run: npm install --ignore-scripts --unsafe-perm
+        run: npm install --ignore-scripts
       - name: Boostrap Dependencies
         run: npx lerna bootstrap --no-ci
-        env:
-          NPM_CONFIG_UNSAFE_PERM: true
       - name: Unit tests
         run: npm run test
