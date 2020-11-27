@@ -12,7 +12,7 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - name: Node 8 Unit Tests
-        uses: open-telemetry/opentelemetry-js/.github/node_unit_tests@v1
+        uses: ./.github/node_unit_tests
   # node10:
   #   runs-on: ubuntu-latest
   #   container:
