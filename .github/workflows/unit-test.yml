@@ -100,7 +100,7 @@ jobs:
   node12-browsers:
     runs-on: ubuntu-latest
     container:
-      image: circleci/node:12-browsers
+      image: node:12-browsers
     env:
       NPM_CONFIG_UNSAFE_PERM: true
     steps:
@@ -113,8 +113,6 @@ jobs:
             package-lock.json
             */*/node_modules
           key: ${{ runner.os }}-node12-${{ hashFiles('**/package-lock.json') }}
-      - name: Fix Permissions
-        run: sudo chmod 777 /root/.cache
       - name: Install Root Dependencies
         run: npm install --ignore-scripts
       - name: Boostrap Dependencies
