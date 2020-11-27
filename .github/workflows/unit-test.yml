@@ -44,7 +44,7 @@ jobs:
             packages/opentelemetry-resource-detector-aws/node_modules
             packages/opentelemetry-resource-detector-gcp/node_modules
             packages/opentelemetry-resources/node_modules
-          key: ${{ $NODE_VERSION }}-${{ cat /tmp/checksums.txt | md5sum }}-20B74F85
+          key: ${{ node --version | grep -oE 'v[0-9]+' }}-${{ cat /tmp/checksums.txt | md5sum }}-20B74F85
       - name: Install Root Dependencies
         run: npm install --ignore-scripts
       - name: Boostrap Dependencies
