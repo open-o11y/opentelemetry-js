@@ -5,98 +5,98 @@ on:
   pull_request:
 
 jobs:
-  node8:
-    runs-on: ubuntu-latest
-    container:
-      image: node:8
-    env:
-      NPM_CONFIG_UNSAFE_PERM: true
-    steps:
-      - uses: actions/checkout@v1
-      - name: Cache Dependencies
-        uses: actions/cache@v2
-        with:
-          path: |
-            node_modules
-            package-lock.json
-            */*/node_modules
-          key: ${{ runner.os }}-node8-${{ hashFiles('**/package-lock.json') }}
-      - name: Install Root Dependencies
-        run: npm install --ignore-scripts
-      - name: Boostrap Dependencies
-        run: npx lerna bootstrap --no-ci
-      - name: Unit tests
-        run: npm run test
-  node10:
-    runs-on: ubuntu-latest
-    container:
-      image: node:10
-    env:
-      NPM_CONFIG_UNSAFE_PERM: true
-    steps:
-      - uses: actions/checkout@v1
-      - name: Cache Dependencies
-        uses: actions/cache@v2
-        with:
-          path: |
-            node_modules
-            package-lock.json
-            */*/node_modules
-          key: ${{ runner.os }}-node10-${{ hashFiles('**/package-lock.json') }}
-      - name: Install Root Dependencies
-        run: npm install --ignore-scripts
-      - name: Boostrap Dependencies
-        run: npx lerna bootstrap --no-ci
-      - name: Unit tests
-        run: npm run test
-  node12:
-    runs-on: ubuntu-latest
-    container:
-      image: node:12
-    env:
-      NPM_CONFIG_UNSAFE_PERM: true
-    steps:
-      - uses: actions/checkout@v1
-      - name: Cache Dependencies
-        uses: actions/cache@v2
-        with:
-          path: |
-            node_modules
-            package-lock.json
-            */*/node_modules
-          key: ${{ runner.os }}-node12-${{ hashFiles('**/package-lock.json') }}
-      - name: Install Root Dependencies
-        run: npm install --ignore-scripts
-      - name: Boostrap Dependencies
-        run: npx lerna bootstrap --no-ci
-        env:
-          NPM_CONFIG_UNSAFE_PERM: true
-      - name: Unit tests
-        run: npm run test
-      - name: Report Coverage
-        run: npm run codecov
-  node14:
-    runs-on: ubuntu-latest
-    container:
-      image: node:14
-    env:
-      NPM_CONFIG_UNSAFE_PERM: true
-    steps:
-      - uses: actions/checkout@v1
-      - name: Cache Dependencies
-        uses: actions/cache@v2
-        with:
-          path: |
-            node_modules
-            package-lock.json
-            */*/node_modules
-          key: ${{ runner.os }}-node14-${{ hashFiles('**/package-lock.json') }}
-      - name: Install Root Dependencies
-        run: npm install --ignore-scripts
-      - name: Boostrap Dependencies
-        run: npx lerna bootstrap --no-ci
-      - name: Unit tests
-        run: npm run test
+  # node8:
+  #   runs-on: ubuntu-latest
+  #   container:
+  #     image: node:8
+  #   env:
+  #     NPM_CONFIG_UNSAFE_PERM: true
+  #   steps:
+  #     - uses: actions/checkout@v1
+  #     - name: Cache Dependencies
+  #       uses: actions/cache@v2
+  #       with:
+  #         path: |
+  #           node_modules
+  #           package-lock.json
+  #           */*/node_modules
+  #         key: ${{ runner.os }}-node8-${{ hashFiles('**/package-lock.json') }}
+  #     - name: Install Root Dependencies
+  #       run: npm install --ignore-scripts
+  #     - name: Boostrap Dependencies
+  #       run: npx lerna bootstrap --no-ci
+  #     - name: Unit tests
+  #       run: npm run test
+  # node10:
+  #   runs-on: ubuntu-latest
+  #   container:
+  #     image: node:10
+  #   env:
+  #     NPM_CONFIG_UNSAFE_PERM: true
+  #   steps:
+  #     - uses: actions/checkout@v1
+  #     - name: Cache Dependencies
+  #       uses: actions/cache@v2
+  #       with:
+  #         path: |
+  #           node_modules
+  #           package-lock.json
+  #           */*/node_modules
+  #         key: ${{ runner.os }}-node10-${{ hashFiles('**/package-lock.json') }}
+  #     - name: Install Root Dependencies
+  #       run: npm install --ignore-scripts
+  #     - name: Boostrap Dependencies
+  #       run: npx lerna bootstrap --no-ci
+  #     - name: Unit tests
+  #       run: npm run test
+  # node12:
+  #   runs-on: ubuntu-latest
+  #   container:
+  #     image: node:12
+  #   env:
+  #     NPM_CONFIG_UNSAFE_PERM: true
+  #   steps:
+  #     - uses: actions/checkout@v1
+  #     - name: Cache Dependencies
+  #       uses: actions/cache@v2
+  #       with:
+  #         path: |
+  #           node_modules
+  #           package-lock.json
+  #           */*/node_modules
+  #         key: ${{ runner.os }}-node12-${{ hashFiles('**/package-lock.json') }}
+  #     - name: Install Root Dependencies
+  #       run: npm install --ignore-scripts
+  #     - name: Boostrap Dependencies
+  #       run: npx lerna bootstrap --no-ci
+  #       env:
+  #         NPM_CONFIG_UNSAFE_PERM: true
+  #     - name: Unit tests
+  #       run: npm run test
+  #     - name: Report Coverage
+  #       run: npm run codecov
+  # node14:
+  #   runs-on: ubuntu-latest
+  #   container:
+  #     image: node:14
+  #   env:
+  #     NPM_CONFIG_UNSAFE_PERM: true
+  #   steps:
+  #     - uses: actions/checkout@v1
+  #     - name: Cache Dependencies
+  #       uses: actions/cache@v2
+  #       with:
+  #         path: |
+  #           node_modules
+  #           package-lock.json
+  #           */*/node_modules
+  #         key: ${{ runner.os }}-node14-${{ hashFiles('**/package-lock.json') }}
+  #     - name: Install Root Dependencies
+  #       run: npm install --ignore-scripts
+  #     - name: Boostrap Dependencies
+  #       run: npx lerna bootstrap --no-ci
+  #     - name: Unit tests
+  #       run: npm run test
   node12-browsers:
     runs-on: ubuntu-latest
     container:
