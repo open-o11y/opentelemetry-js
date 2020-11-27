@@ -11,7 +11,6 @@ jobs:
       image: node:8
     env:
       NPM_CONFIG_UNSAFE_PERM: true
-      NODE_VERSION: $(node --version | grep -oE 'v[0-9]+')
     steps:
       - uses: actions/checkout@v1
       - name: Create Checksum
@@ -44,7 +43,7 @@ jobs:
             packages/opentelemetry-resource-detector-aws/node_modules
             packages/opentelemetry-resource-detector-gcp/node_modules
             packages/opentelemetry-resources/node_modules
-          key: ${{ node --version | grep -oE 'v[0-9]+' }}-${{ cat /tmp/checksums.txt | md5sum }}-20B74F85
+          key: ${{ runner.os }}-8-${{ cat /tmp/checksums.txt | md5sum }}-20B74F85
       - name: Install Root Dependencies
         run: npm install --ignore-scripts
       - name: Boostrap Dependencies
