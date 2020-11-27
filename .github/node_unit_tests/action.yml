@@ -5,7 +5,7 @@ runs:
     - name: Create Checksum
       run: sh .github/scripts/checksum.sh /tmp/checksums.txt
       shell: bash
-    - run: echo "$(checksum "/tmp/checksums.txt")"
+    - run: echo "$(cat "/tmp/checksums.txt")"
     # - name: Cache Dependencies
     #   uses: actions/cache@v2
     #   with:
