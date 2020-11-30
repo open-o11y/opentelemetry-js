@@ -104,6 +104,8 @@ jobs:
     env:
       NPM_CONFIG_UNSAFE_PERM: true
     steps:
+      - name: Permission Setup
+        run: sudo chmod -R 777 $GITHUB_WORKSPACE /github /__w/_temp
       - uses: actions/checkout@v1
       # - name: Cache Dependencies
       #   uses: actions/cache@v2
